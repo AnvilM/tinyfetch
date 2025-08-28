@@ -128,7 +128,6 @@ func printInfo(modules []config.Module, container config.Container) {
 			fmt.Print(*module.Label)
 		}
 
-		// Заполнение до края строки
 		labelLen := 0
 		if module.Label != nil {
 			labelLen = len(*module.Label)

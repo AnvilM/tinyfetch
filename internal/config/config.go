@@ -91,10 +91,6 @@ func checkRequired(cfg *Config) {
 
 	// Title
 	if cfg.Title != nil {
-		if cfg.Title.FilePath == nil {
-			logger.Fatal("title.filePath is required!")
-		}
-
 		if cfg.Title.Color == nil || !contains(allowedColors, string(*cfg.Title.Color)) {
 			cfg.Title.Color = Ptr(*defaultCfg.Title.Color)
 		}
