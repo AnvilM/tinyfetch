@@ -13,7 +13,15 @@ func GetDefaultConfig() Config {
 			BorderColor: newColor("white"),
 		},
 		Modules: &[]Module{
-			{Type: newString("user"), InfoColor: newColor("white"), Label: newString("user"), LabelColor: newColor("white")},
+			{Type: newString("user"), Label: newString("user")},
+			{Type: newString("hostname"), Label: newString("hostname")},
+			{Type: newString("os"), Label: newString("os")},
+			{Type: newString("kernel"), Label: newString("kernel")},
+			{Type: newString("uptime"), Label: newString("uptime")},
+			{Type: newString("shell"), Label: newString("shell")},
+			{Type: newString("packages"), Label: newString("packages")},
+			{Type: newString("memory"), Label: newString("memory")},
+			{Type: newString("colors"), Label: newString("colors")},
 		},
 	}
 }
