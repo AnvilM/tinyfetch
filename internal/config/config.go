@@ -140,6 +140,14 @@ func checkRequired(cfg *Config) {
 		if module.Label == nil {
 			module.Label = module.Type
 		}
+
+		if module.LabelColor == nil {
+			module.LabelColor = Ptr(*(*defaultCfg.Modules)[0].LabelColor)
+		}
+
+		if module.PrefixColor == nil {
+			module.PrefixColor = Ptr(*(*defaultCfg.Modules)[0].PrefixColor)
+		}
 	}
 }
 

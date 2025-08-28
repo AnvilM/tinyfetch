@@ -29,7 +29,6 @@ func GetTypeInfo(typee string) string {
 
 
 
-// UserGetInfo возвращает текущего пользователя
 func UserGetInfo() string {
 	user := os.Getenv("USER")
 	if user == "" {
@@ -38,7 +37,6 @@ func UserGetInfo() string {
 	return user
 }
 
-// HostnameGetInfo возвращает hostname
 func HostnameGetInfo() string {
 	host, err := os.Hostname()
 	if err != nil {
@@ -47,7 +45,6 @@ func HostnameGetInfo() string {
 	return host
 }
 
-// OSGetInfo возвращает название дистрибутива Linux
 func OSGetInfo() string {
 	out, err := exec.Command("cat", "/etc/os-release").Output()
 	if err != nil {
@@ -61,7 +58,6 @@ func OSGetInfo() string {
 	return runtime.GOOS
 }
 
-// KernelGetInfo возвращает версию ядра
 func KernelGetInfo() string {
 	out, err := exec.Command("uname", "-r").Output()
 	if err != nil {
@@ -70,7 +66,6 @@ func KernelGetInfo() string {
 	return strings.TrimSpace(string(out))
 }
 
-// UptimeGetInfo возвращает время работы системы в формате 1d 5h 52m
 func UptimeGetInfo() string {
 	data, err := os.ReadFile("/proc/uptime")
 	if err != nil {
@@ -97,7 +92,6 @@ func UptimeGetInfo() string {
 	return strings.Join(parts, " ")
 }
 
-// ShellGetInfo возвращает текущий shell
 func ShellGetInfo() string {
 	shell := os.Getenv("SHELL")
 	if shell == "" {
@@ -115,7 +109,6 @@ func PackagesGetInfo() string {
 	return strings.TrimSpace(string(out))
 }
 
-// MemoryGetInfo возвращает используемую и общую память в формате used | all Mib
 func MemoryGetInfo() string {
 	data, err := os.ReadFile("/proc/meminfo")
 	if err != nil {
