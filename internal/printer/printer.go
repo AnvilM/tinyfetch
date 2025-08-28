@@ -102,8 +102,8 @@ func printInfo(modules []config.Module, container config.Container) {
 
 	boxWidth := maxLen + paddingLeft + paddingRight
 
-	boxBorderTop := strings.Repeat(" ", marginLeft) + "╭" + strings.Repeat("─", boxWidth) + "╮"
-	boxBorderBottom := strings.Repeat(" ", marginLeft) + "╰" + strings.Repeat("─", boxWidth) + "╯"
+	boxBorderTop := strings.Repeat(" ", marginLeft) + getColor(*container.BorderColor).Sprint("╭") + getColor(*container.BorderColor).Sprint(strings.Repeat("─", boxWidth)) + getColor(*container.BorderColor).Sprint("╮")
+	boxBorderBottom := strings.Repeat(" ", marginLeft) + getColor(*container.BorderColor).Sprint("╰") + getColor(*container.BorderColor).Sprint(strings.Repeat("─", boxWidth)) + getColor(*container.BorderColor).Sprint("╯")
 
 	fmt.Println(boxBorderTop)
 
@@ -111,10 +111,10 @@ func printInfo(modules []config.Module, container config.Container) {
 	for i, module := range modules {
 
 		if i == len(modules)-1 && len(modules) > 1 {
-			fmt.Println(strings.Repeat(" ", marginLeft) + "├" + strings.Repeat("─", boxWidth) + "┤")
+			fmt.Println(strings.Repeat(" ", marginLeft) + getColor(*container.BorderColor).Sprint("├") + getColor(*container.BorderColor).Sprint(strings.Repeat("─", boxWidth)) + getColor(*container.BorderColor).Sprint("┤"))
 		}
 
-		fmt.Print(strings.Repeat(" ", marginLeft) + "│" + strings.Repeat(" ", paddingLeft))
+		fmt.Print(strings.Repeat(" ", marginLeft) + getColor(*container.BorderColor).Sprint("│") + strings.Repeat(" ", paddingLeft))
 
 		// Prefix
 		if module.Prefix != nil && module.PrefixColor != nil {
@@ -140,7 +140,7 @@ func printInfo(modules []config.Module, container config.Container) {
 		spaces := maxLen - labelLen - prefixMargin + paddingRight
 		fmt.Print(strings.Repeat(" ", spaces))
 
-		fmt.Print("│" + strings.Repeat(" ", marginRight))
+		fmt.Print(getColor(*container.BorderColor).Sprint("│") + strings.Repeat(" ", marginRight))
 
 		// Info
 		if module.Type != nil && module.InfoColor != nil {

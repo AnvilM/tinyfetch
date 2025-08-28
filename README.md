@@ -12,11 +12,10 @@ TinyFetch is a lightweight, Go-based utility designed to display system informat
 
 ## Gallery 📸
 
-<img src="./assets/images/preview_1.png">
-
-<img src="./assets/images/preview_3.png">
-
-<img src="./assets/images/preview_2.png">
+<img src="./assets/images/preview_1.png" width="385px">
+<img src="./assets/images/preview_3.png" width="385px">
+<img src="./assets/images/preview_4.png" width="385px">
+<img src="./assets/images/preview_2.png" width="385px" align="top">
 
 
 ## Installation ⚙️
