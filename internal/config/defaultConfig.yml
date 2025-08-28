@@ -1,0 +1,14 @@
+title: 
+  filePath: "~/.config/tinyfetch/title"
+  color: "green"
+
+modules:
+  - type: "user"
+    color: "green"
+    label: "user"
+    labelColor: "green"
+
+  - type: "hostname"
+    color: "green"
+    label: "hostname"
+    labelColor: "green"
