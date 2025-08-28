@@ -13,10 +13,8 @@ import (
 	"github.com/mitchellh/go-homedir"
 )
 
-// Ptr helper для указателей
 func Ptr[T any](v T) *T { return &v }
 
-// Print выводит заголовок и список модулей в рамке с цветами
 func Print(cfg config.Config) {
 	printTitle(cfg.Title)
 	if cfg.Modules != nil && cfg.Container != nil {
@@ -24,7 +22,6 @@ func Print(cfg config.Config) {
 	}
 }
 
-// getColor возвращает объект *color.Color для указанного цвета
 func getColor(col config.Color) *color.Color {
 	switch col {
 	case "white":
@@ -68,7 +65,7 @@ func printTitle(title *config.Title) {
 }
 
 func printInfo(modules []config.Module, container config.Container) {
-	// Безопасные значения контейнера
+
 	marginLeft := 0
 	if container.MarginLeft != nil {
 		marginLeft = *container.MarginLeft
@@ -86,7 +83,6 @@ func printInfo(modules []config.Module, container config.Container) {
 		paddingRight = *container.PaddingRight
 	}
 
-	// Вычисляем maxLen
 	maxLen := 0
 	for _, module := range modules {
 		labelLen := 0
@@ -113,8 +109,8 @@ func printInfo(modules []config.Module, container config.Container) {
 
 	// Print modules
 	for i, module := range modules {
-		// Разделитель между модулями
-		if i > 0 {
+
+		if i == len(modules)-1 && len(modules) > 1 {
 			fmt.Println(strings.Repeat(" ", marginLeft) + "├" + strings.Repeat("─", boxWidth) + "┤")
 		}
 
