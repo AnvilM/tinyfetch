@@ -94,14 +94,9 @@ func printInfo(modules []config.Module, container config.Container) {
 			labelLen = len(*module.Label)
 		}
 
-		iconMargin := 0
-		if module.IconMarginRight != nil {
-			iconMargin = *module.IconMarginRight
-		}
-
 		length := labelLen
-		if module.Icon != nil {
-			length += utf8.RuneCountInString(*module.Icon) + iconMargin
+		if module.Prefix != nil {
+			length += utf8.RuneCountInString(*module.Prefix)
 		}
 
 		if length > maxLen {
@@ -125,14 +120,9 @@ func printInfo(modules []config.Module, container config.Container) {
 
 		fmt.Print(strings.Repeat(" ", marginLeft) + "│" + strings.Repeat(" ", paddingLeft))
 
-		// Icon
-		if module.Icon != nil && module.IconColor != nil {
-			getColor(*module.IconColor).Print(*module.Icon)
-			iconMargin := 0
-			if module.IconMarginRight != nil {
-				iconMargin = *module.IconMarginRight
-			}
-			fmt.Print(strings.Repeat(" ", iconMargin))
+		// Prefix
+		if module.Prefix != nil && module.PrefixColor != nil {
+			getColor(*module.PrefixColor).Print(*module.Prefix)
 		}
 
 		// Label
@@ -147,12 +137,12 @@ func printInfo(modules []config.Module, container config.Container) {
 		if module.Label != nil {
 			labelLen = len(*module.Label)
 		}
-		iconMargin := 0
-		if module.Icon != nil && module.IconMarginRight != nil {
-			iconMargin = *module.IconMarginRight + utf8.RuneCountInString(*module.Icon)
+		prefixMargin := 0
+		if module.Prefix != nil {
+			prefixMargin =  utf8.RuneCountInString(*module.Prefix)
 		}
 
-		spaces := maxLen - labelLen - iconMargin + paddingRight
+		spaces := maxLen - labelLen - prefixMargin + paddingRight
 		fmt.Print(strings.Repeat(" ", spaces))
 
 		fmt.Print("│" + strings.Repeat(" ", marginRight))

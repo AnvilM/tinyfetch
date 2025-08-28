@@ -32,9 +32,8 @@ type Module struct {
 	InfoColor       *Color  `yaml:"infoColor"`
 	Label           *string `yaml:"label"`
 	LabelColor      *Color  `yaml:"labelColor"`
-	Icon            *string `yaml:"icon"`
-	IconColor       *Color  `yaml:"iconColor"`
-	IconMarginRight *int    `yaml:"iconMarginRight"`
+	Prefix            *string `yaml:"prefix"`
+	PrefixColor       *Color  `yaml:"prefixColor"`
 }
 
 type Container struct {
@@ -118,6 +117,8 @@ func checkRequired(cfg *Config) {
 		if cfg.Container.PaddingRight == nil {
 			cfg.Container.PaddingRight = Ptr(*defaultCfg.Container.PaddingRight)
 		}
+	} else {
+		cfg.Container = Ptr(*defaultCfg.Container)
 	}
 
 	// Modules
