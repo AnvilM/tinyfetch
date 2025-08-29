@@ -8,12 +8,14 @@ import (
 	"strconv"
 	"strings"
 	"time"
+	"tinyfetch/internal/config"
+	"tinyfetch/internal/utils/logger"
 
 	"github.com/fatih/color"
 )
 
-func GetTypeInfo(typee string) string {
-	switch typee {
+func GetTypeInfo(module config.Module) string {
+	switch *module.Type {
 		case "user": return UserGetInfo()
 		case "hostname": return HostnameGetInfo()
 		case "os": return OSGetInfo()
@@ -23,10 +25,21 @@ func GetTypeInfo(typee string) string {
 		case "packages": return PackagesGetInfo()
 		case "memory": return MemoryGetInfo()
 		case "colors": return ColorsGetInfo()
+		case "command": return CommandGetInfo(module)
 		default: return ""
 	}
 }
 
+
+func CommandGetInfo(module config.Module) string{
+    cmd := exec.Command("sh", "-c", *module.Script)
+
+    out, err := cmd.CombinedOutput()
+	if err != nil {
+		logger.Fatal("failed to execute script: %s", *module.Script)
+	}
+    return string(out)
+}
 
 
 func UserGetInfo() string {

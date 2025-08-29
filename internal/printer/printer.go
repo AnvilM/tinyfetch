@@ -144,9 +144,9 @@ func printInfo(modules []config.Module, container config.Container) {
 
 		// Info
 		if module.Type != nil && module.InfoColor != nil {
-			getColor(*module.InfoColor).Print(types.GetTypeInfo(*module.Type) + "\n")
+			getColor(*module.InfoColor).Print(types.GetTypeInfo(module) + "\n")
 		} else if module.Type != nil {
-			fmt.Print(types.GetTypeInfo(*module.Type) + "\n")
+			fmt.Print(types.GetTypeInfo(module) + "\n")
 		} else {
 			fmt.Print("\n")
 		}

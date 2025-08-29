@@ -32,8 +32,9 @@ type Module struct {
 	InfoColor       *Color  `yaml:"infoColor"`
 	Label           *string `yaml:"label"`
 	LabelColor      *Color  `yaml:"labelColor"`
-	Prefix            *string `yaml:"prefix"`
-	PrefixColor       *Color  `yaml:"prefixColor"`
+	Prefix          *string `yaml:"prefix"`
+	PrefixColor     *Color  `yaml:"prefixColor"`
+	Script          *string `yaml:"script"`
 }
 
 type Container struct {
@@ -61,6 +62,7 @@ var allowedTypes = []string{
 	"packages",
 	"memory",
 	"colors",
+	"command",
 }
 
 // LoadConfig reads the configuration and returns Config
@@ -147,6 +149,10 @@ func checkRequired(cfg *Config) {
 
 		if module.PrefixColor == nil {
 			module.PrefixColor = Ptr(*(*defaultCfg.Modules)[0].PrefixColor)
+		}
+
+		if *module.Type == "command" && module.Script == nil {
+			logger.Fatal("command module must have script!")
 		}
 	}
 }
