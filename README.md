@@ -17,7 +17,6 @@ TinyFetch is a lightweight, Go-based utility designed to display system informat
 <img src="./assets/images/preview_4.png" width="385px">
 <img src="./assets/images/preview_2.png" width="385px" align="top">
 
-
 ## Installation ⚙️
 
 ### Dependencies
@@ -74,7 +73,7 @@ The `container` section controls the layout and styling of the output container,
 | `borderColor`  | String  | No      | white   | `blue`  | Color of the container border. See [Colors](#colors) for available options. |
 
 #### Modules
-The `modules` section is an array of objects, each representing a system information module to display. This section is **required**, and at least one module must be defined. Each module object specifies the type of information, its label, and styling.
+The `modules` section is an array of objects, each representing a system information module to display. This section is **required**, and at least one module must be defined. Each module object specifies the type of information, its label, and styling. For the `command` module type, the `script` field is mandatory to specify the shell command to execute.
 
 | Field         | Type   | Required | Default         | Example   | Description                                      |
 |---------------|--------|----------|-----------------|-----------|--------------------------------------------------|
@@ -84,10 +83,10 @@ The `modules` section is an array of objects, each representing a system informa
 | `infoColor`   | String | No       | white           | `cyan`    | Color of the module's data output (e.g., "5h 0m" for uptime). See [Colors](#colors) for available options. |
 | `prefix`      | String | No       | "" (empty)      | `->`      | Optional prefix before the label.                |
 | `prefixColor` | String | No       | white           | `yellow`  | Color of the prefix. See [Colors](#colors) for available options. |
+| `script`      | String | Yes (for `command` type) | N/A | `whoami` | Shell command to execute (required for `command` module type). |
 
 #### Colors
 The following colors are supported for `color`, `borderColor`, `labelColor`, `infoColor`, and `prefixColor` fields:
--:-
 
 - `black`
 - `red`
@@ -109,9 +108,10 @@ The following module types are available for the `type` field in the `modules` s
 - `packages`: Lists the number of installed packages.
 - `memory`: Displays memory usage.
 - `colors`: Shows a color palette for reference.
+- `command`: Executes a custom shell command via `sh -c` and displays its output. Requires the `script` field to specify the command.
 
 ### Example Configuration
-Below is an example `config.yml` that demonstrates the configuration of a title, container, and multiple modules:
+Below is an example `config.yml` that demonstrates the configuration of a title, container, and multiple modules, including the new `command` module:
 
 ```yaml
 title:
@@ -142,7 +142,15 @@ modules:
     infoColor: white
     prefix: "=>"
     prefixColor: yellow
+  - type: command
+    label: Current User
+    labelColor: blue
+    infoColor: white
+    prefix: "=>"
+    prefixColor: yellow
+    script: whoami
 ```
+
 ## Credits 💌
 
 Thanks to: [**`Nitch`**](https://github.com/ssleert/nitch)
