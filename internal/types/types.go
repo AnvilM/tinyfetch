@@ -38,7 +38,7 @@ func CommandGetInfo(module config.Module) string{
 	if err != nil {
 		logger.Fatal("failed to execute script: %s", *module.Script)
 	}
-    return string(out)
+    return strings.TrimSuffix(string(out), "\n")
 }
 
 
